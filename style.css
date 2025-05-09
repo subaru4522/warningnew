@@ -1,94 +1,55 @@
+/* 移动设备优先的响应式设计 */
 :root {
-    --bg-color: #1a1a1a;
-    --text-color: #f0f0f0;
-    --prompt-color: #4CAF50;
-    --command-color: #8BC34A;
-    --warning-color: #4CAF50;
+    --base-font-size: 14px;
+    --mobile-font-size: 16px;
+    --terminal-width: 95%;
+    --terminal-height: 80vh;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Courier New', monospace;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-}
-
-.terminal-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: var(--mobile-font-size);
+    padding: 10px;
 }
 
 .terminal {
-    width: 90%;
-    max-width: 800px;
-    height: 60vh;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 5px;
-    box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
-    padding: 20px;
+    width: var(--terminal-width);
+    height: var(--terminal-height);
+    padding: 15px;
+    font-size: var(--mobile-font-size);
     overflow-y: auto;
-    position: relative;
-}
-
-.prompt {
-    color: var(--prompt-color);
-}
-
-.command {
-    color: var(--command-color);
-}
-
-.warning {
-    color: var(--warning-color);
-    font-weight: bold;
-}
-
-.output {
-    margin: 10px 0;
-    white-space: pre-wrap;
+    -webkit-overflow-scrolling: touch; /* 平滑滚动 iOS */
 }
 
 .input-line {
-    display: flex;
-    align-items: center;
+    min-height: 2em; /* 增大触摸区域 */
 }
 
 #command-input {
-    flex-grow: 1;
-    background: transparent;
-    border: none;
-    color: var(--command-color);
-    font-family: 'Courier New', monospace;
-    font-size: inherit;
-    outline: none;
-    padding: 0 5px;
+    font-size: var(--mobile-font-size);
+    min-height: 2em;
+    padding: 5px;
 }
 
-.typing-effect {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    animation: typing 3.5s steps(40, end);
+/* 针对小屏幕的额外调整 */
+@media (max-width: 320px) {
+    :root {
+        --mobile-font-size: 14px;
+    }
 }
 
+/* 针对 iPhone 横屏模式 */
+@media (min-width: 500px) and (max-height: 500px) {
+    :root {
+        --terminal-height: 90vh;
+    }
+}
+
+/* 打字动画速度调整 */
 @keyframes typing {
     from { width: 0 }
     to { width: 100% }
 }
 
-@media (max-width: 600px) {
-    .terminal {
-        width: 95%;
-        height: 70vh;
-        padding: 10px;
-        font-size: 14px;
-    }
+.typing-effect {
+    animation: typing 2.5s steps(40, end); /* 加快动画速度 */
 }
